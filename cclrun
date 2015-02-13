@@ -1,0 +1,11 @@
+#!/bin/sh
+ccl=$(when ccl)
+if [ "$ccl" = "" ]; then
+  echo "(brew|yum|apt-get|port) install [Clozure CL]"
+  exit 1
+fi
+if [ ! "$2" = "" ] && [ "$1" = "--script" ]; then
+  $ccl --load $2 --eval "(ccl:quit)"
+else
+  $ccl $@
+fi
